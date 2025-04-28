@@ -92,7 +92,7 @@ public class HotelManagement {
             System.out.println("No guests available to update.");
             return;
         }
-        System.out.println("Enter numbe of guest to update:");
+        System.out.println("Enter number of guest to update:");
         int roomNumber = getIntInput();
         Guest foundGuest = null;
         for(Guest g : guests){
