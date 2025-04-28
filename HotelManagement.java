@@ -48,9 +48,6 @@ public class HotelManagement {
                 case 4:
                     deleteGuest();
                     break;
-                case 5:
-                    searchGuest();
-                    break;
                 case 6:
                     System.out.println("Exiting... Thank you!");
                     running = false;
