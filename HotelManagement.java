@@ -69,7 +69,7 @@ public class HotelManagement {
         System.out.println("Enter Mobile Number:");
         int mobilenumber = scanner.nextInt();
         System.out.println("Enter Email:");
-        int mobilenumber = scanner.nextIntLine();
+        int mobilenumber = scanner.nextLine();
         if(isRoomBooked(roomNumber))
         {
             System.out.println("Room" + roomNumber + " is already booked. please choose another room.");
