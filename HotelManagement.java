@@ -64,9 +64,9 @@ public class HotelManagement {
     private static void addGuest() {
         System.out.print("Enter guest name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter room number: ");
-        int roomNumber = scanner.nextInt();
         scanner.nextLine(); // Consume newline
+        System.out.print("Enter room number: ");
+        int roomNumber = getIntInput();
         if(isRoomBooked(roomNumber))
         {
             System.out.println("Room" + roomNumber + " is already booked. please choose another room.");
