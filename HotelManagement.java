@@ -5,15 +5,17 @@ class Guest {
     String name;
     int roomNumber;
     int mobilenumber;
+    String email;
 
-    Guest(String name, int roomNumber,int mobilenumber) {
+    Guest(String name, int roomNumber,int mobilenumber, string email) {
         this.name = name;
         this.roomNumber = roomNumber;
         this.mobilenumber = mobilenumber;
+        this.email = email;
     }
 
     public String toString() {
-        return "Guest Name: " + name + ", Room Number: " + roomNumber + ", Mobile Number: " + mobilenumber;
+        return "Guest Name: " + name + ", Room Number: " + roomNumber + ", Mobile Number: " + mobilenumber + ", Email: " + email;
     }
 }
 
@@ -62,15 +64,18 @@ public class HotelManagement {
         System.out.print("Enter guest name: ");
         String name = scanner.nextLine();
         scanner.nextLine(); // Consume newline
-        System.out.print("Enter room number: ");
+        System.out.println("Enter room number: ");
         int roomNumber = scanner.nextInt();
+        System.out.println("Enter Mobile Number:");
         int mobilenumber = scanner.nextInt();
+        System.out.println("Enter Email:");
+        int mobilenumber = scanner.nextIntLine();
         if(isRoomBooked(roomNumber))
         {
             System.out.println("Room" + roomNumber + " is already booked. please choose another room.");
         }
         else{
-        guests.add(new Guest(name, roomNumber, mobilenumber));
+        guests.add(new Guest(name, roomNumber, mobilenumber, email));
         System.out.println("Guest added successfully.");
         }
     }
@@ -104,6 +109,8 @@ public class HotelManagement {
             foundGuest.name = scanner.nextline();
             System.out.println("Enter a Guest Mobile Number: ");
             foundGuest.mobilenumber= scanner.nextline();
+            System.out.println("Enter a Guest Email: ");
+            foundGuest.email= scanner.nextline();
             System.out.println("Guest Details updates successfully !!);
         }
         else
