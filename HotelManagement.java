@@ -142,5 +142,16 @@ public class HotelManagement {
             System.out.println("Guest not found.");
         }
     }
+    private static boolean isRoomBooked(int roomNumber)
+    {
+        for(Guest g : guests)
+            {
+                if(g.roomNumber == roomNumber)
+                {
+                    return true;
+                }
+                return false;
+            }
+    }
 }
    
