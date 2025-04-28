@@ -18,7 +18,6 @@ class Guest {
 public class HotelManagement {
     private static ArrayList<Guest> guests = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
         boolean running = true;
 
