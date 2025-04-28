@@ -63,7 +63,7 @@ public class HotelManagement {
         String name = scanner.nextLine();
         scanner.nextLine(); // Consume newline
         System.out.print("Enter room number: ");
-        int roomNumber = getIntInput();
+        int roomNumber = scanner.nextInt();
         if(isRoomBooked(roomNumber))
         {
             System.out.println("Room" + roomNumber + " is already booked. please choose another room.");
@@ -90,7 +90,7 @@ public class HotelManagement {
             return;
         }
         System.out.println("Enter number of guest to update:");
-        int roomNumber = getIntInput();
+        int roomNumber = scanner.nextInt();
         Guest foundGuest = null;
         for(Guest g : guests){
             if(g.roomNumber == roomNumber){
@@ -115,7 +115,7 @@ public class HotelManagement {
             return;
         }
         System.out.println("Enter room number of a Guest to delete:");
-        int roomNumber = getIntInput();
+        int roomNumber =  scanner.nextInt();
         Guest guestToRemove = null;
         for(Guest g : guests){
             if(g.roomNumber == roomNumber){
