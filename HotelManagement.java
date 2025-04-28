@@ -28,7 +28,6 @@ public class HotelManagement {
             System.out.println("2. View Guests");
             System.out.println("3. Update Guest");
             System.out.println("4. Delete Guest");
-            System.out.println("5. Search Guest");
             System.out.println("6. Exit");
             System.out.print("Enter choice: ");
 
