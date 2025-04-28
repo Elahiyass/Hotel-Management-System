@@ -4,14 +4,16 @@ import java.util.Scanner;
 class Guest {
     String name;
     int roomNumber;
+    int mobilenumber;
 
-    Guest(String name, int roomNumber) {
+    Guest(String name, int roomNumber,int mobilenumber) {
         this.name = name;
         this.roomNumber = roomNumber;
+        this.mobilenumber = mobilenumber;
     }
 
     public String toString() {
-        return "Guest Name: " + name + ", Room Number: " + roomNumber;
+        return "Guest Name: " + name + ", Room Number: " + roomNumber + ", Mobile Number: " + mobilenumber;
     }
 }
 
@@ -62,12 +64,13 @@ public class HotelManagement {
         scanner.nextLine(); // Consume newline
         System.out.print("Enter room number: ");
         int roomNumber = scanner.nextInt();
+        int mobilenumber = scanner.nextInt();
         if(isRoomBooked(roomNumber))
         {
             System.out.println("Room" + roomNumber + " is already booked. please choose another room.");
         }
         else{
-        guests.add(new Guest(name, roomNumber));
+        guests.add(new Guest(name, roomNumber, mobilenumber));
         System.out.println("Guest added successfully.");
         }
     }
@@ -99,6 +102,8 @@ public class HotelManagement {
         if(foundGuest != null){
             System.out.print("Enter new Guest Name : ");
             foundGuest.name = scanner.nextline();
+            System.out.println("Enter a Guest Mobile Number: ");
+            foundGuest.mobilenumber= scanner.nextline();
             System.out.println("Guest Details updates successfully !!);
         }
         else
