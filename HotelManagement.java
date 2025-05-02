@@ -1,157 +1,153 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Guest {
-    String name;
-    int roomNumber;
-    int mobilenumber;
-    String email;
-
-    Guest(String name, int roomNumber,int mobilenumber, string email) {
-        this.name = name;
-        this.roomNumber = roomNumber;
-        this.mobilenumber = mobilenumber;
-        this.email = email;
-    }
-
-    public String toString() {
-        return "Guest Name: " + name + ", Room Number: " + roomNumber + ", Mobile Number: " + mobilenumber + ", Email: " + email;
-    }
-}
-
-public class HotelManagement {
+public class HotelManagementSystem {
     private static ArrayList<Guest> guests = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         boolean running = true;
-
         while (running) {
-            System.out.println("\n---- Hotel Management System ----");
+            System.out.println("\n--- Hotel Management System ---");
             System.out.println("1. Add Guest");
             System.out.println("2. View Guests");
             System.out.println("3. Update Guest");
             System.out.println("4. Delete Guest");
+            System.out.println("5. Search Guest");
             System.out.println("6. Exit");
             System.out.print("Enter choice: ");
-
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            int choice = getIntInput();
 
             switch (choice) {
-                case 1:
-                    addGuest();
-                    break;
-                case 2:
-                    viewGuests();
-                    break;
-                case 3:
-                    updateGuest();
-                    break;
-                case 4:
-                    deleteGuest();
-                    break;
-                case 6:
-                    System.out.println("Exiting... Thank you!");
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Try again.");
+                case 1: addGuest(); break;
+                case 2: viewGuests(); break;
+                case 3: updateGuest(); break;
+                case 4: deleteGuest(); break;
+                case 5: searchGuest(); break;
+                case 6: running = false; System.out.println("Thank you!"); break;
+                default: System.out.println("Invalid choice. Try 1-6.");
             }
         }
     }
 
     private static void addGuest() {
-        System.out.print("Enter guest name: ");
+        System.out.print("Enter name: ");
         String name = scanner.nextLine();
-        scanner.nextLine(); // Consume newline
-        System.out.println("Enter room number: ");
-        int roomNumber = scanner.nextInt();
-        System.out.println("Enter Mobile Number:");
-        int mobilenumber = scanner.nextInt();
-        System.out.println("Enter Email:");
-        int mobilenumber = scanner.nextLine();
-        if(isRoomBooked(roomNumber))
-        {
-            System.out.println("Room" + roomNumber + " is already booked. please choose another room.");
-        }
-        else{
-        guests.add(new Guest(name, roomNumber, mobilenumber, email));
-        System.out.println("Guest added successfully.");
+        System.out.print("Enter mobile number: ");
+        String mobile = scanner.nextLine();
+        System.out.print("Enter email: ");
+        String email = scanner.nextLine();
+        System.out.print("Enter room number: ");
+        int roomNumber = getIntInput();
+
+        if (isRoomBooked(roomNumber)) {
+            System.out.println("Room already booked.");
+        } else {
+            guests.add(new Guest(name, mobile, email, roomNumber));
+            System.out.println("Guest added successfully.");
         }
     }
 
     private static void viewGuests() {
         if (guests.isEmpty()) {
-            System.out.println("No guests added yet.");
+            System.out.println("No guests.");
         } else {
-            System.out.println("\n-- Guest List --");
             for (Guest g : guests) {
                 System.out.println(g);
             }
         }
     }
-    private static void updateGuest(){
-        if(guests.isEmpty()){
-            System.out.println("No guests available to update.");
-            return;
-        }
-        System.out.println("Enter number of guest to update:");
-        int roomNumber = scanner.nextInt();
-        Guest foundGuest = null;
-        for(Guest g : guests){
-            if(g.roomNumber == roomNumber){
-                foundGuest = g;
-                break;
+
+    private static void updateGuest() {
+        System.out.print("Enter room number to update: ");
+        int roomNumber = getIntInput();
+        for (Guest g : guests) {
+            if (g.roomNumber == roomNumber) {
+                System.out.print("New name: ");
+                g.name = scanner.nextLine();
+                System.out.print("New mobile: ");
+                g.mobile = scanner.nextLine();
+                System.out.print("New email: ");
+                g.email = scanner.nextLine();
+                System.out.println("Guest updated.");
+                return;
             }
         }
-        if(foundGuest != null){
-            System.out.print("Enter new Guest Name : ");
-            foundGuest.name = scanner.nextline();
-            System.out.println("Enter a Guest Mobile Number: ");
-            foundGuest.mobilenumber= scanner.nextline();
-            System.out.println("Enter a Guest Email: ");
-            foundGuest.email= scanner.nextline();
-            System.out.println("Guest Details updates successfully !!);
+        System.out.println("Guest not found.");
+    }
+
+    private static void deleteGuest() {
+        System.out.print("Enter room number to delete: ");
+        int roomNumber = getIntInput();
+        for (Guest g : guests) {
+            if (g.roomNumber == roomNumber) {
+                guests.remove(g);
+                System.out.println("Guest deleted.");
+                return;
+            }
         }
-        else
-        {
+        System.out.println("Guest not found.");
+    }
+
+    private static void searchGuest() {
+        System.out.print("Enter guest name to search: ");
+        String name = scanner.nextLine().toLowerCase();
+        boolean found = false;
+        for (Guest g : guests) {
+            if (g.name.toLowerCase().contains(name)) {
+                System.out.println(g);
+                found = true;
+            }
+        }
+        if (!found) {
             System.out.println("Guest not found.");
         }
     }
-    private static void deleteGuest()
-    {
-        if(guests.isEmpty()){
-            System.out.println("No guests available to delete.");
-            return;
-        }
-        System.out.println("Enter room number of a Guest to delete:");
-        int roomNumber =  scanner.nextInt();
-        Guest guestToRemove = null;
-        for(Guest g : guests){
-            if(g.roomNumber == roomNumber){
-                guestToRemove = g;
-                break;
+
+    private static boolean isRoomBooked(int roomNumber) {
+        for (Guest g : guests) {
+            if (g.roomNumber == roomNumber) {
+                return true;
             }
         }
-        if(guestToRemove != null)
-        {
-            guests.remove(guestsToRemove);
-            System.out.println("Guest deleted Successfully !");
-        }
-        else{
-            System.out.println("Guest not found.");
-        }
+        return false;
     }
-    private static boolean isRoomBooked(int roomNumber)
-    {
-        for(Guest g : guests)
-            {
-                if(g.roomNumber == roomNumber)
-                {
-                    return true;
-                }
-                return false;
+
+    private static int getIntInput() {
+        int input;
+        while (true) {
+            try {
+                input = Integer.parseInt(scanner.nextLine());
+                return input;
+            } catch (NumberFormatException e) {
+                System.out.print("Enter a valid number: ");
             }
+        }
     }
 }
-   
+
+class Person {
+    protected String name;
+    protected String mobile;
+    protected String email;
+
+    public Person(String name, String mobile, String email) {
+        this.name = name;
+        this.mobile = mobile;
+        this.email = email;
+    }
+}
+
+class Guest extends Person {
+    int roomNumber;
+
+    public Guest(String name, String mobile, String email, int roomNumber) {
+        super(name, mobile, email);
+        this.roomNumber = roomNumber;
+    }
+
+    public String toString() {
+        return "Name: " + name + ", Room: " + roomNumber +
+               ", Mobile: " + mobile + ", Email: " + email;
+    }
+}
